@@ -1,0 +1,46 @@
+from pywhatkit import image_to_ascii_art as tt
+image = 'ironman.jpg'
+text = "ironman"        
+tt(image, text)
+
+import turtle as t 
+s_x = -320              
+s_y = 250
+
+p = t.Pen()
+#t.setup(430,768)
+t.bgcolor('black')
+p.speed(0)
+p.up()
+p.width(3)
+f_m = 0
+d_m = 4
+
+def set_col(c):
+    chars = {".": 'gray', "S" : 'red', "#" : 'red', "&" : 'red', "@":'black', "$" : 'black', "%" : 'black', "!":'yellow', ":" :'red', "*":'red'}
+    col = chars[c]
+    p.pencolor(col)
+
+def d(m, s_char):
+     p.up()
+     if s_char != '\n':
+         set_col(s_char)
+
+     p.goto(s_x- m, s_y )
+     p.down()
+     p.speed(0)
+     p.forward(1)
+
+text = open('ironman.txt','r')
+te = text.readlines()
+for i in te:
+    for j in i:
+        d(f_m, j)
+        f_m -= 4
+    s_y -= 8
+    s_x = -320 
+    f_m = 0
+    d_m = 4
+
+t.done()
+
